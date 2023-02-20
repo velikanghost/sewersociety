@@ -1,20 +1,14 @@
 import Image from "next/image";
-import Link from "next/link"
-import React from "react"
-import { FiTwitter } from "react-icons/fi"
-import { RxDiscordLogo } from "react-icons/rx"
-import logo from '../public/img/swerLogo.jpeg';
-
+import Link from "next/link";
+import React from "react";
+import { FiTwitter } from "react-icons/fi";
+import { RxDiscordLogo } from "react-icons/rx";
+import Logo from "../public/img/sewer-society.png";
 
 const Header = () => {
-  const logoStyle = {
-    height: '80px',
-    width: '80px',
-    marginRight: '10px'
-  };
   return (
-    <nav className="h-24 w-full shadow-nav z-40">
-      <div className="container mx-auto h-full flex justify-between items-center">
+    <nav className="h-24 w-full shadow-nav z-40 fixed bg-[#E9E8DD] top-0">
+      <div className="container mx-auto h-full flex justify-between items-center px-2 sm:px-0">
         <ul className="brand">
           {/* <Link className="brand-link" href="/">
             <span className="font-bold font-intro  text-[1.6rem] cursor-pointer align-middle uppercase text-[#5A5B59]">
@@ -22,23 +16,17 @@ const Header = () => {
             </span>
           </Link> */}
           <Link className="brand-link" href="/">
-            <Image src={logo} alt="Logo" style={logoStyle} />
+            <Image src={Logo} alt="Logo" width={80} height={80} />
           </Link>
         </ul>
-        <ul className="flex justify-center items-center gap-[1.5rem] text-[1.65rem] text-[#333] cursor-pointer">
-
-          <Link className="brand-link" href="#about-us">
-            <span className="font-bold font-intro  text-[.6rem] cursor-pointer align-middle uppercase text-[#5A5B59]">
-              how to mint
-            </span>
+        <ul className="flex justify-center items-center sm:gap-[1.5rem] gap-[10px] sm:text-[1.65rem] text-[20px] text-[#333] cursor-pointer">
+          <Link className="brand-link" href="/about-us">
+            how to mint
           </Link>
-
           <Link className="brand-link" href="/sewer">
-            <span className="font-bold font-intro  text-[1rem] cursor-pointer align-middle uppercase text-[#5A5B59]">
-              inscribe
-            </span>
+            inscribe
           </Link>
-
+          {/* Socials */}
           <a className="list-item" href="https://www.twitter.com/">
             <FiTwitter />
           </a>
@@ -48,7 +36,7 @@ const Header = () => {
         </ul>
       </div>
     </nav>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

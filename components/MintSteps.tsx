@@ -4,12 +4,12 @@ import Image from "next/image"
 const MintSteps = () => {
   return (
     <section className="how_to_mint">
-      <div className="container mx-auto grid grid-cols-2 justify-center items-center gap-[5rem] text-white">
+      <div className="container mx-auto grid sm:grid-cols-2 justify-center items-center gap-[5rem]">
         <div className="right-box">
           <h3 className="font-bold text-center font-semibold text-[32px] font-intro pb-[12px] text-[#e85a4f] uppercase">
-          How to Mint
+          <span className="text-[#333333]">How to</span> Mint
           </h3>
-          <p className="w-[800px] text-[21px] mx-auto text-[#8E8D86]">
+          <p>
             Vestibulum ullamcorper lacus et massa molestie, vitae semper nisi
             efficitur. In id orci lectus. Duis vitae lorem justo. Nullam tempor
             ante vitae orci pulvinar lobortis. Etiam tincidunt laoreet vehicula.
@@ -19,7 +19,7 @@ const MintSteps = () => {
             ut tortor rhoncus auctor.
           </p>
           <br />
-          <p className="w-[800px] text-[21px] mx-auto text-[#8E8D86]">
+          <p>
             Vestibulum ullamcorper lacus et massa molestie, vitae semper nisi
             efficitur. In id orci lectus. Duis vitae lorem justo. Nullam tempor
             ante vitae orci pulvinar lobortis. Etiam tincidunt laoreet vehicula.
@@ -29,7 +29,7 @@ const MintSteps = () => {
             ut tortor rhoncus auctor.
           </p>
           <br />
-          <p className="w-[800px] text-[21px] mx-auto text-[#8E8D86]">
+          <p>
             Vestibulum ullamcorper lacus et massa molestie, vitae semper nisi
             efficitur. In id orci lectus. Duis vitae lorem justo. Nullam tempor
             ante vitae orci pulvinar lobortis. Etiam tincidunt laoreet vehicula.
@@ -39,7 +39,7 @@ const MintSteps = () => {
             ut tortor rhoncus auctor.
           </p>
           <br />
-          <p className="w-[800px] text-[21px] mx-auto text-[#8E8D86]">
+          <p>
             Vestibulum ullamcorper lacus et massa molestie, vitae semper nisi
             efficitur. In id orci lectus. Duis vitae lorem justo. Nullam tempor
             ante vitae orci pulvinar lobortis. Etiam tincidunt laoreet vehicula.

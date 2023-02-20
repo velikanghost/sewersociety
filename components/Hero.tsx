@@ -4,7 +4,7 @@ import React from "react"
 const Hero = () => {
   return (
     <section className="hero mt-[80px]">
-      <div className="container mx-auto grid grid-cols-2 justify-center items-center gap-[5rem] text-white">
+      <div className="container mx-auto grid sm:grid-cols-2 justify-center items-center gap-[5rem]">
         <div className="w-full">
           <Image
             className="w-full"
@@ -14,11 +14,11 @@ const Hero = () => {
             alt="hero_img"
           />
         </div>
-        <div className="right-box">
-          <h3 className="font-bold font-intro text-[48px] pb-[12px] text-[#e85a4f] uppercase">
-            Sewer Society
+        <div className="right-box px-2 sm:px-0">
+          <h3 className="font-bold font-intro text-4xl sm:text-[48px] pb-[12px] text-[#e85a4f] uppercase">
+            Sewer <span className="text-[#333333]">Society</span> 
           </h3>
-          <p className="text-[21px] text-[#8E8D86]">
+          <p className="text-base sm:text-[21px] text-[#333333] text-justify">
           From the sewers we rise. 10000 strong, the 3rds represent 
           a new wave and movement. Permanently inscribed on bitcoin using 
           ordinals, sewer society is whatever you want(choose) it to be, 
@@ -26,7 +26,7 @@ const Hero = () => {
           through generations, proof that you were here.
           </p>
         </div>
-      </div>
+      </div>  
     </section>
   )
 }
