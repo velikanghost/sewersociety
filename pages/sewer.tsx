@@ -5,11 +5,25 @@ import crypto from "crypto"
 import HashLoader from "react-spinners/HashLoader"
 import Footer from "../components/Footer"
 import Header from "../components/Header"
+import Modal from "react-modal"
+
+Modal.setAppElement("#__next")
 
 const override: CSSProperties = {
   display: "block",
   margin: "0 auto",
   borderColor: "red",
+}
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
 }
 
 const Sewer = () => {
@@ -18,6 +32,9 @@ const Sewer = () => {
   const [images, setImages] = useState<any[]>([])
   const [, /* filteredImages */ setFilteredImages] = useState<any[]>([])
   const [loading, setLoading] = useState<boolean>(false)
+  const [modalIsOpen, setIsOpen] = useState(false)
+  const [currentImage, setCurrentImage] = useState("")
+  const [hoveredImage, setHoveredImage] = useState(null)
 
   const B = [
     "7fa435c44774ca1daa3bcfa6e23e896f",
@@ -101,6 +118,15 @@ const Sewer = () => {
     getIpfsHash()
   }, [])
 
+  const handleImageHover = (image) => {
+    setCurrentImage(image)
+    setIsOpen(true)
+  }
+
+  /* const showImageModal = () => {
+    set
+  } */
+
   return (
     <>
       <main>
@@ -122,8 +148,14 @@ const Sewer = () => {
               <div className="grid grid-cols-3 gap-6 justify-center items-center">
                 {images.map((image, index) => {
                   const hash = ipfsHash[index]
+                  const isHovered = hoveredImage === index
                   return (
-                    <div key={index} className="card">
+                    <div
+                      key={index}
+                      className="image_card"
+                      onMouseEnter={() => setHoveredImage(index)}
+                      onMouseLeave={() => setHoveredImage(null)}
+                    >
                       <Image
                         src={image}
                         alt={`Image with hash ${hash}`}
@@ -134,6 +166,22 @@ const Sewer = () => {
                           filter: B.includes(hash) ? "grayscale(1)" : "none",
                         }}
                       />
+                      {isHovered && !B.includes(hash) && (
+                        <div className="overlay">
+                          <button
+                            className="download-button"
+                            onClick={() => {}}
+                          >
+                            Download
+                          </button>
+                          <button
+                            className="copy-link-button"
+                            onClick={() => {}}
+                          >
+                            Copy Link
+                          </button>
+                        </div>
+                      )}
                     </div>
                   )
                 })}
@@ -141,6 +189,7 @@ const Sewer = () => {
             </>
           )}
         </div>
+
         <Footer />
       </main>
     </>
