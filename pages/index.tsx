@@ -14,12 +14,19 @@ export default function Home() {
         <meta name="description" content="My Images" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <main>
         <Header />
         <Hero />
-        <MintSteps />
+        <section id="about-us">
+          <MintSteps />
+        </section>
         <div className="text-center font-bold font-intro uppercase pb-8">
-          <Link href="/sewer">Go to Mint</Link>
+          <Link href="/sewer">
+          <h3 className=" text-center font-semibold text-[px] font-intro pb-[12px] text-[#e85a4f]">
+          How to Mint
+          </h3>
+          </Link>
         </div>
         <Footer />
       </main>

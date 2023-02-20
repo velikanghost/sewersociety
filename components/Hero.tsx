@@ -8,7 +8,7 @@ const Hero = () => {
         <div className="w-full">
           <Image
             className="w-full"
-            src="/img/shit1.JPG"
+            src="/img/shit1.png"
             height={300}
             width={300}
             alt="hero_img"
@@ -19,18 +19,11 @@ const Hero = () => {
             Sewer Society
           </h3>
           <p className="text-[21px] text-[#8E8D86]">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis libero
-            sem, molestie id leo pulvinar, interdum fermentum sapien. Vestibulum
-            malesuada lectus vitae aliquam laoreet. Pellentesque eu mollis
-            neque. Sed pharetra diam lectus, ac porta tortor pellentesque et.
-            Etiam at tincidunt augue, ac dapibus nisl. Quisque aliquet dignissim
-            lacus, id ultrices massa ullamcorper eu. Mauris ac nisi vitae dolor
-            tincidunt eleifend. Pellentesque elit felis, congue sed tincidunt
-            vitae, ullamcorper quis nulla. Fusce et nulla egestas, sagittis
-            velit et, laoreet ante. Aenean fringilla, ante vel auctor rutrum,
-            sem tortor euismod purus, id malesuada odio elit at massa. Proin eu
-            cursus mi. Pellentesque eu nibh sollicitudin, maximus ipsum sed,
-            feugiat mauris.
+          From the sewers we rise. 10000 strong, the 3rds represent 
+          a new wave and movement. Permanently inscribed on bitcoin using 
+          ordinals, sewer society is whatever you want(choose) it to be, 
+          a new world, a form of expression, a meme, a story passed down 
+          through generations, proof that you were here.
           </p>
         </div>
       </div>
