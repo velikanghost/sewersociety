@@ -115,7 +115,7 @@ const Sewer = () => {
                 aria-label="Loading Spinner"
                 data-testid="loader"
               />
-              <p className="text-center font-bold">One moment...</p>
+              <p className="text-center font-bold">One Moment...</p>
             </div>
           ) : (
             <>
