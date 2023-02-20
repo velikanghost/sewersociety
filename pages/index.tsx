@@ -1,10 +1,10 @@
-import Head from "next/head"
-import React from "react"
-import Header from "../components/Header"
-import Footer from "../components/Footer"
-import Hero from "../components/Hero"
-import MintSteps from "../components/MintSteps"
-import Link from "next/link"
+import Head from "next/head";
+import React from "react";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import Hero from "../components/Hero";
+import MintSteps from "../components/MintSteps";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -14,15 +14,18 @@ export default function Home() {
         <meta name="description" content="My Images" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <main>
         <Header />
         <Hero />
-        <MintSteps />
-        <div className="text-center font-bold font-intro uppercase pb-8">
-          <Link href="/sewer">Go to Mint</Link>
+        <section id="about-us" className="mt-9">
+          <MintSteps />
+        </section>
+        <div className="sm:text-center text-right sm:mr-0 mr-2 font-bold font-intro uppercase pb-8">
+          <Link href="/sewer" className="underline hover:no-underline">inscribe</Link>
         </div>
         <Footer />
       </main>
     </>
-  )
+  );
 }

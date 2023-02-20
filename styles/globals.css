@@ -91,3 +91,6 @@ body {
   overflow-x: hidden;
   background-color: #E9E8DD;
 }
+
+.brand-link {@apply uppercase sm:text-base text-[14px] font-intro text-[#5A5B59];}
+.how_to_mint p{@apply sm:w-[600px] w-[370px] text-justify mx-auto}
