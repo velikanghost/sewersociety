@@ -1,14 +1,24 @@
 import React from "react"
 import { FiTwitter } from "react-icons/fi"
 import { RxDiscordLogo } from "react-icons/rx"
+import Image from "next/image"
+import footerLogo from "../public/img/sewer-footer.png"
 
 const Footer = () => {
   return (
-    <footer className="bg-[#8E8D89] p-[2.2rem] text-center text-white">
-      <div className="footer-items">
-        <h1 className="m-0 font-medium uppercase">Sewer Society</h1>
-        <div className="w-[130px] mx-auto py-[1.2rem]">
-          <div className="flex justify-center gap-5 items-center text-[1.5rem]">
+    <footer className="bg-[#474744] px-6 text-center text-white">
+      <div className="container mx-auto h-[160px] xl:h-[200px] md:h-[180px] flex justify-between items-center">
+        <div className="footer-logo">
+          <Image
+            className="xl:w-52"
+            src={footerLogo}
+            alt="Footer Logo"
+            width={130}
+            height={100}
+          />
+        </div>
+        <div className="w-[130px] flex flex-col items-end justify-end pb-[.5rem] pt-[1.2rem]">
+          <div className="flex justify-end gap-5 items-center text-bodybg text-[1.5rem]">
             <a className="social-item" href="https://www.twitter.com/">
               <FiTwitter />
             </a>
@@ -16,8 +26,8 @@ const Footer = () => {
               <RxDiscordLogo />
             </a>
           </div>
+          <p className="text-bodybg text-xs pt-3">&#169; 2023 Sewer Society</p>
         </div>
-        <p>&#169; 2023</p>
       </div>
     </footer>
   )

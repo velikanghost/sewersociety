@@ -3,14 +3,10 @@ import Image from "next/image"
 import React, { CSSProperties, useEffect, useState } from "react"
 import crypto from "crypto"
 import HashLoader from "react-spinners/HashLoader"
+import { saveAs } from "file-saver"
+import Link from "next/link"
 import Footer from "../components/Footer"
 import Header from "../components/Header"
-import Modal from "react-modal"
-import { saveAs } from "file-saver"
-import { redirect } from "next/dist/server/api-utils"
-import Link from "next/link"
-
-Modal.setAppElement("#__next")
 
 const override: CSSProperties = {
   display: "block",
@@ -18,31 +14,28 @@ const override: CSSProperties = {
   borderColor: "red",
 }
 
-const customStyles = {
-  content: {
-    top: "50%",
-    left: "50%",
-    right: "auto",
-    bottom: "auto",
-    marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
-  },
-}
-
 const Inscribe = () => {
   const [, /* ordHash */ setOrdHash] = useState<any[]>([])
   const [ipfsHash, setIpfsHash] = useState<any[]>([])
   const [images, setImages] = useState<any[]>([])
-  const [, /* filteredImages */ setFilteredImages] = useState<any[]>([])
+  const [filteredImages, setFilteredImages] = useState<any[]>([])
   const [loading, setLoading] = useState<boolean>(false)
   const [hoveredImage, setHoveredImage] = useState(null)
 
   const B = [
     "7fa435c44774ca1daa3bcfa6e23e896f",
-    "29e7650a0a8324a78a1f2fa30ffe02fd",
     "a7124ce154c604df483961d588dde49c",
     "437a92881c141132ea5e96f57bc2618b",
+    "29e7650a0a8324a78a1f2fa30ffe02fd",
     "ee2596c2cc82186c9881c9f826a08916",
+    "3a10add8986659567704c5998d9adb22",
+    "3a10add8986659567704c5998d9a4b26",
+    "8877f1e626e38aba6b5223adff8285c3",
+    "3a10add89866592h7704c5998d9adb22",
+    "e22331b50c5699e9c3a154f8d990ff24",
+    "9deefc2d3d3f02298e53acf26b6e274f",
+    "b2df8f97f3515a5524e2e4cf04cfd647",
+    "7e133f79870c72d281ac32745013de5d",
   ]
 
   useEffect(() => {
@@ -81,12 +74,15 @@ const Inscribe = () => {
 
   useEffect(() => {
     const getIpfsHash = async () => {
-      const imageNames = ["0.png", "1.png", "2.png", "3.png", "4.png"]
       try {
         setLoading(true)
-        const imagesIds = imageNames.map((image) => {
-          return `https://ipfs.io/ipfs/QmeF1xZ7x2EDn4duY7zAdrn7aY6vdwZB9bErxjkfPTaB4Q/${image}`
-        })
+
+        const imagesIds = []
+        for (let i = 0; i < 50; i++) {
+          imagesIds.push(
+            `https://ipfs.io/ipfs/QmeF1xZ7x2EDn4duY7zAdrn7aY6vdwZB9bErxjkfPTaB4Q/${i}.png`
+          )
+        }
 
         setImages(imagesIds)
 
@@ -101,16 +97,9 @@ const Inscribe = () => {
         )
 
         setIpfsHash(hashes)
+        //console.table(hashes)
 
-        // Check if elements of ipfsHash are in B and then display images of hashes that are not in B
-        const imagesToShow = imagesIds.filter((image, index) => {
-          return !B.includes(hashes[index])
-        })
-
-        console.log("Images to show: ", imagesToShow)
-        setFilteredImages(imagesToShow)
         setLoading(false)
-        // Do something with the imagesToShow array, like setting it to state to display the images
       } catch (error) {
         console.log(error)
       }
@@ -119,11 +108,19 @@ const Inscribe = () => {
     getIpfsHash()
   }, [])
 
+  useEffect(() => {
+    const imagesToShow = images.filter((image, index) => {
+      const hash = ipfsHash[index]
+      return B.includes(hash)
+    })
+    setFilteredImages(imagesToShow)
+  }, [ipfsHash, images])
+
   return (
     <>
       <main>
         <Header />
-        <div className="container mx-auto py-32 px-2 sm:px-0">
+        <div className="container mx-auto px-6 xl:px-0 py-16 mt-16">
           {loading ? (
             <div className="loader grid justify-center items-center p-3 h-full">
               <HashLoader
@@ -137,7 +134,14 @@ const Inscribe = () => {
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-3 gap-6 justify-center items-center">
+              <h2 className="text-center font-intro font-bold text-2xl md:text-3xl text-primary">
+                Choose Your Turd(s)
+              </h2>
+              <p className="text-center text-secondary text-md mb-8">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+                volutpat vulputate.
+              </p>
+              <div className="grid grid-cols-2 gap-2 md:gap-5 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 xl:gap-7 justify-center items-center">
                 {images.map((image, index) => {
                   const hash = ipfsHash[index]
                   const isHovered = hoveredImage === index
@@ -155,13 +159,15 @@ const Inscribe = () => {
                         width={300}
                         height={300}
                         style={{
-                          filter: B.includes(hash) ? "grayscale(1)" : "none",
+                          filter: filteredImages.includes(image)
+                            ? "grayscale(1)"
+                            : "none",
                         }}
                       />
                       {isHovered && !B.includes(hash) && (
                         <div className="overlay">
                           <button
-                            className="download-button"
+                            className="download-button font-intro"
                             onClick={() => {
                               !B.includes(hash) &&
                                 saveAs(
@@ -176,7 +182,7 @@ const Inscribe = () => {
                             Download
                           </button>
                           <Link
-                            className="copy-link-button"
+                            className="copy-link-button font-intro"
                             href="https://inscribe.ordswap.io/"
                           >
                             OrdSwap
