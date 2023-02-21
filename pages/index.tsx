@@ -18,9 +18,7 @@ export default function Home() {
       <main>
         <Header />
         <Hero />
-        <section id="about-us" className="mt-9">
-          <MintSteps />
-        </section>
+        <MintSteps />
         <div className="sm:text-center text-right sm:mr-0 mr-2 font-bold font-intro uppercase pb-8">
           <Link href="/inscribe" className="underline hover:no-underline">
             Inscribe
