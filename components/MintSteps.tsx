@@ -6,10 +6,10 @@ const MintSteps = () => {
     <section className="how_to_mint">
       <div className="container mx-auto grid sm:grid-cols-2 justify-center items-center gap-[5rem]">
         <div className="right-box">
-          <h3 className="font-bold text-center font-semibold text-[32px] font-intro pb-[12px] text-[#e85a4f] uppercase">
-          <span className="text-[#333333]">How to</span> Mint
+          <h3 className="font-bold text-center text-[32px] font-intro pb-[12px] text-[#e85a4f] uppercase">
+            <span className="text-[#333333]">How to</span> Mint
           </h3>
-          <p>
+          <p className="text-[#8E8D89]">
             Vestibulum ullamcorper lacus et massa molestie, vitae semper nisi
             efficitur. In id orci lectus. Duis vitae lorem justo. Nullam tempor
             ante vitae orci pulvinar lobortis. Etiam tincidunt laoreet vehicula.
@@ -59,7 +59,6 @@ const MintSteps = () => {
             alt="hero_img"
           />
         </div>
-
       </div>
     </section>
   )

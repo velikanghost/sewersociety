@@ -1,13 +1,13 @@
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
-import { FiTwitter } from "react-icons/fi";
-import { RxDiscordLogo } from "react-icons/rx";
-import Logo from "../public/img/sewer-society.png";
+import Image from "next/image"
+import Link from "next/link"
+import React from "react"
+import { FiTwitter } from "react-icons/fi"
+import { RxDiscordLogo } from "react-icons/rx"
+import Logo from "../public/img/sewer-logo.jpg"
 
 const Header = () => {
   return (
-    <nav className="h-24 w-full shadow-nav z-40 fixed bg-[#E9E8DD] top-0">
+    <nav className="h-24 w-full shadow-nav z-40 fixed bg-[#F4F4EF] top-0">
       <div className="container mx-auto h-full flex justify-between items-center px-2 sm:px-0">
         <ul className="brand">
           {/* <Link className="brand-link" href="/">
@@ -36,7 +36,7 @@ const Header = () => {
         </ul>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
