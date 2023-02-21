@@ -3,7 +3,7 @@ import React from "react"
 
 const Hero = () => {
   return (
-    <section className="hero mt-[80px]">
+    <section className="hero my-[80px]">
       <div className="container mx-auto grid sm:grid-cols-2 justify-center items-center gap-[5rem]">
         <div className="w-full">
           <Image
