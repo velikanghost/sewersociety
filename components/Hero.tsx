@@ -16,17 +16,17 @@ const Hero = () => {
         </div>
         <div className="right-box px-2 sm:px-0">
           <h3 className="font-bold font-intro text-4xl sm:text-[48px] pb-[12px] text-[#e85a4f] uppercase">
-            Sewer <span className="text-[#333333]">Society</span> 
+            Sewer <span className="text-[#333333]">Society</span>
           </h3>
-          <p className="text-base sm:text-[21px] text-[#333333] text-justify">
-          From the sewers we rise. 10000 strong, the 3rds represent 
-          a new wave and movement. Permanently inscribed on bitcoin using 
-          ordinals, sewer society is whatever you want(choose) it to be, 
-          a new world, a form of expression, a meme, a story passed down 
-          through generations, proof that you were here.
+          <p className="text-base sm:text-[21px] text-[#8E8D89] text-justify">
+            From the sewers we rise. 10000 strong, the 3rds represent a new wave
+            and movement. Permanently inscribed on bitcoin using ordinals, sewer
+            society is whatever you want(choose) it to be, a new world, a form
+            of expression, a meme, a story passed down through generations,
+            proof that you were here.
           </p>
         </div>
-      </div>  
+      </div>
     </section>
   )
 }
