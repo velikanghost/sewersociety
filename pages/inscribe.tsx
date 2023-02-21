@@ -118,11 +118,11 @@ const Inscribe = () => {
 
   return (
     <>
+      <Header />
       <main>
-        <Header />
-        <div className="container mx-auto px-6 xl:px-0 py-16 mt-16">
+        <div className="container mx-auto px-6 xl:px-0 py-16 mt-16 h-full">
           {loading ? (
-            <div className="loader grid justify-center items-center p-3 h-full">
+            <div className="loader grid justify-center items-center p-3 h-[450px]">
               <HashLoader
                 color="#8E8D89"
                 cssOverride={override}
@@ -159,9 +159,7 @@ const Inscribe = () => {
                         width={300}
                         height={300}
                         style={{
-                          filter: filteredImages.includes(image)
-                            ? "grayscale(1)"
-                            : "none",
+                          filter: B.includes(hash) ? "grayscale(1)" : "none",
                         }}
                       />
                       {isHovered && !B.includes(hash) && (
@@ -196,9 +194,8 @@ const Inscribe = () => {
             </>
           )}
         </div>
-
-        <Footer />
       </main>
+      <Footer />
     </>
   )
 }
