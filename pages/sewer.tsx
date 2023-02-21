@@ -105,7 +105,7 @@ const Sewer = () => {
     <>
       <main>
         <Header />
-        <div className="container mx-auto py-20">
+        <div className="container mx-auto py-32">
           {loading ? (
             <div className="loader grid justify-center items-center p-3 h-full">
               <HashLoader
