@@ -19,9 +19,9 @@ export default function Home() {
         <Header />
         <Hero />
         <MintSteps />
-        <div className="sm:text-center text-right sm:mr-0 mr-2 font-bold font-intro uppercase pb-8">
-          <Link href="/inscribe" className="underline hover:no-underline">
-            Inscribe
+        <div className="flex justify-center items-center sm:mr-0 mr-2 font-bold font-intro uppercase pt-9 pb-12 text-primary">
+          <Link href="/inscribe" className="hover:no-underline">
+            CLICK HERE TO INSCRIBE
           </Link>
         </div>
         <Footer />
