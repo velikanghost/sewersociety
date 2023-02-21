@@ -6,6 +6,9 @@ import HashLoader from "react-spinners/HashLoader"
 import Footer from "../components/Footer"
 import Header from "../components/Header"
 import Modal from "react-modal"
+import { saveAs } from "file-saver"
+import { redirect } from "next/dist/server/api-utils"
+import Link from "next/link"
 
 Modal.setAppElement("#__next")
 
@@ -159,16 +162,25 @@ const Inscribe = () => {
                         <div className="overlay">
                           <button
                             className="download-button"
-                            onClick={() => {}}
+                            onClick={() => {
+                              !B.includes(hash) &&
+                                saveAs(
+                                  image,
+                                  `${image.replace(
+                                    "https://ipfs.io/ipfs/QmeF1xZ7x2EDn4duY7zAdrn7aY6vdwZB9bErxjkfPTaB4Q/",
+                                    ""
+                                  )}`
+                                )
+                            }}
                           >
                             Download
                           </button>
-                          <button
+                          <Link
                             className="copy-link-button"
-                            onClick={() => {}}
+                            href="https://inscribe.ordswap.io/"
                           >
-                            Copy Link
-                          </button>
+                            OrdSwap
+                          </Link>
                         </div>
                       )}
                     </div>

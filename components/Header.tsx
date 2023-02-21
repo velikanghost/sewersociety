@@ -16,14 +16,14 @@ const Header = () => {
             </span>
           </Link> */}
           <Link className="brand-link" href="/">
-            <Image src={Logo} alt="Logo" width={80} height={80} />
+            <Image src={Logo} alt="Logo" width={130} height={100} />
           </Link>
         </ul>
         <ul className="flex justify-center items-center sm:gap-[1.5rem] gap-[10px] sm:text-[1.65rem] text-[20px] text-[#333] cursor-pointer">
-          <Link className="brand-link" href="/about-us">
+          <Link className="brand-link" href="#how-to-mint">
             how to mint
           </Link>
-          <Link className="brand-link" href="/sewer">
+          <Link className="brand-link" href="/inscribe">
             inscribe
           </Link>
           {/* Socials */}
