@@ -13,6 +13,11 @@ module.exports = {
       fontFamily: {
         intro: ["Eczar", "serif"],
       },
+      colors: {
+        primary: "#e85a4f",
+        secondary: "#8E8D89",
+        bodybg: "#F4F4EE",
+      },
     },
   },
   plugins: [],
