@@ -3,7 +3,7 @@ import Image from "next/image"
 
 const MintSteps = () => {
   return (
-    <section className="how_to_mint">
+    <section id="how-to-mint" className="how_to_mint">
       <div className="container mx-auto grid sm:grid-cols-2 justify-center items-center gap-[5rem]">
         <div className="right-box row-start-2 sm:row-start-1 px-2 sm:px-0">
           <h3 className="font-bold text-left text-4xl sm:text-[48px] font-intro pb-[12px] text-[#e85a4f] uppercase">
