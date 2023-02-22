@@ -211,5 +211,7 @@ body {
   @apply uppercase sm:text-base text-[12px] font-intro text-[#5A5B59];
 }
 .how_to_mint p {
-  @apply text-justify text-base sm:text-[21px] text-[#5A5B59] cursor-default;
+  @apply text-justify text-base sm:text-[21px] text-[#5A5B59] cursor-default  leading-[153%] xl:leading-[180%];
 }
+
+.pagination li {@apply px-3 py-[9.5px] flex items-center h-[38px] ml-0 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-[#474744] hover:text-white cursor-default}
