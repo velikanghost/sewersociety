@@ -6,7 +6,7 @@ import Logo from "../public/img/sewer-s-crop.png"
 const Header = () => {
   return (
     <nav className="h-20 w-full shadow-nav z-40 fixed bg-[#F4F4EF] top-0">
-      <div className="container mx-auto h-full flex justify-between items-center px-4 md:px-6 xl:px-0">
+      <div className="container mx-auto h-full flex justify-between items-center px-4 md:px-6">
         <div className="brand">
           <Link className="brand-link" href="/">
             <Image className="" src={Logo} alt="Logo" width={130} height={80} />
