@@ -20,12 +20,14 @@ const override: CSSProperties = {
 const PAGE_SIZE = 20;
 
 const Inscribe = () => {
-  const [ordHash, setOrdHash] = useState<any[]>([]);
-  const [ipfsHashes, setIpfsHashes] = useState<{ [key: string]: string }>({});
-  const [images, setImages] = useState<string[]>([]);
-  const [filteredImages, setFilteredImages] = useState<string[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [hoveredImage, setHoveredImage] = useState<number | null>(null);
+
+  const [ordHash, setOrdHash] = useState<any[]>([])
+  const [ipfsHashes, setIpfsHashes] = useState<{ [key: string]: string }>({})
+  const [images, setImages] = useState<string[]>([])
+  const [filteredImages, setFilteredImages] = useState<string[]>([])
+  const [inscribedImages, setInscribedImages] = useState<string[]>([])
+  const [loading, setLoading] = useState<boolean>(false)
+  const [hoveredImage, setHoveredImage] = useState<number | null>(null)
   // Pagination
   const [currentPage, setCurrentPage] = useState<number>(1);
 
@@ -122,15 +124,21 @@ const Inscribe = () => {
   useEffect(() => {
     const imagesToShow = images.filter((image) => {
       const hash = ipfsHashes[image]
-      return B.includes(hash)
+      return !ordHash.includes(hash)
+    })
+    const imagesToOmit = images.filter((image) => {
+      const hash = ipfsHashes[image]
+      return ordHash.includes(hash)
     })
     setFilteredImages(imagesToShow)
+    setInscribedImages(imagesToOmit)
   }, [ipfsHashes, images])
 
-  /* useEffect(() => {
-    console.table(JSON.stringify(ipfsHashes))
+  useEffect(() => {
+    //console.table(JSON.stringify(ipfsHashes))
+    //console.table(!filteredImages)
     console.table(ordHash)
-  }, [ipfsHashes, ordHash]) */
+  }, [ipfsHashes, ordHash])
 
   // Get current Page
   /* const lastPage = currentPage * imgPerPag
@@ -148,6 +156,8 @@ const Inscribe = () => {
     const newOffset = (data.selected * PAGE_SIZE) % 7000
     setCurrentPage(newOffset)
   }*/
+
+  const showInscribed = () => {}
 
   return (
     <>
@@ -176,10 +186,23 @@ const Inscribe = () => {
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
                 volutpat vulputate.
               </p>
+              <div className="inscribed">
+                <button onClick={showInscribed}>Check Inscribed 3rd(s)</button>
+                {inscribedImages.map((img, i) => (
+                  <div key={i} className="image_card">
+                    <Image
+                      src={img}
+                      alt={`inscribed 3rd ${img}`}
+                      width={300}
+                      height={300}
+                    />
+                  </div>
+                ))}
+              </div>
               <div className="grid grid-cols-2 gap-2 md:gap-5 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 xl:gap-7 justify-center items-center">
-                {images.map((image, index) => {
-                  const hash = ipfsHashes[image];
-                  const isHovered = hoveredImage === index;
+                {filteredImages.map((image, index) => {
+                  //const hash = ipfsHashes[image]
+                  const isHovered = hoveredImage === index
                   return (
                     <div
                       key={index}
@@ -189,27 +212,26 @@ const Inscribe = () => {
                     >
                       <Image
                         src={image}
-                        alt={`Image with hash ${hash}`}
+                        alt={`Image with hash ${image}`}
                         className="w-full rounded-md"
                         width={300}
                         height={300}
-                        style={{
+                        /* style={{
                           filter: B.includes(hash) ? "grayscale(1)" : "none",
-                        }}
+                        }} */
                       />
-                      {isHovered && !B.includes(hash) && (
+                      {isHovered && filteredImages && (
                         <div className="overlay">
                           <button
                             className="download-button font-intro"
                             onClick={() => {
-                              !B.includes(hash) &&
-                                saveAs(
-                                  image,
-                                  `${image.replace(
-                                    "https://ipfs.io/ipfs/QmeF1xZ7x2EDn4duY7zAdrn7aY6vdwZB9bErxjkfPTaB4Q/",
-                                    ""
-                                  )}`
-                                )
+                              saveAs(
+                                image,
+                                `${image.replace(
+                                  "https://ipfs.io/ipfs/QmeF1xZ7x2EDn4duY7zAdrn7aY6vdwZB9bErxjkfPTaB4Q/",
+                                  ""
+                                )}`
+                              )
                             }}
                           >
                             Download
