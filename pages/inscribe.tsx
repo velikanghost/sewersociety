@@ -1,13 +1,14 @@
-import axios from "axios"
-import Image from "next/image"
-import React, { CSSProperties, useEffect, useState } from "react"
-import crypto from "crypto"
-import HashLoader from "react-spinners/HashLoader"
-import { saveAs } from "file-saver"
-import Link from "next/link"
-import Footer from "../components/Footer"
-import Header from "../components/Header"
-import ReactPaginate from "react-paginate"
+import axios from "axios";
+import Image from "next/image";
+import React, { CSSProperties, useEffect, useState } from "react";
+import crypto from "crypto";
+import HashLoader from "react-spinners/HashLoader";
+import { saveAs } from "file-saver";
+import Link from "next/link";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
+// import ReactPaginate from "react-paginate";
+import Pagination from "react-js-pagination";
 
 const override: CSSProperties = {
   display: "block",
@@ -15,9 +16,11 @@ const override: CSSProperties = {
   borderColor: "red",
 }
 
-const PAGE_SIZE = 20
+
+const PAGE_SIZE = 20;
 
 const Inscribe = () => {
+
   const [ordHash, setOrdHash] = useState<any[]>([])
   const [ipfsHashes, setIpfsHashes] = useState<{ [key: string]: string }>({})
   const [images, setImages] = useState<string[]>([])
@@ -26,7 +29,7 @@ const Inscribe = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const [hoveredImage, setHoveredImage] = useState<number | null>(null)
   // Pagination
-  const [currentPage, setCurrentPage] = useState<number>(0)
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const B = [
     "7fa435c44774ca1daa3bcfa6e23e896f",
@@ -82,7 +85,6 @@ const Inscribe = () => {
     const getIpfsHashes = async () => {
       try {
         setLoading(true)
-
         const startIndex = currentPage * PAGE_SIZE
         const endIndex = startIndex + PAGE_SIZE
 
@@ -115,7 +117,7 @@ const Inscribe = () => {
         console.log(error)
       }
     }
-
+    
     getIpfsHashes()
   }, [currentPage])
 
@@ -138,16 +140,22 @@ const Inscribe = () => {
     console.table(ordHash)
   }, [ipfsHashes, ordHash])
 
-  const handlePageClick = (data) => {
-    const selectedPage = data.selected
-    const newPage =
-      selectedPage > currentPage ? currentPage + 1 : currentPage - 1
-    setCurrentPage(
-      newPage >= 0 && newPage < Math.ceil(7000 / PAGE_SIZE)
-        ? newPage
-        : currentPage
-    )
-  }
+  // Get current Page
+  /* const lastPage = currentPage * imgPerPag
+  const firstPage = lastPage - imgPerPag
+  const currentImgs = images.slice(firstPage, lastPage) */
+
+  const handlePageClick = (pageNumber) => {
+    setHoveredImage(null);
+    setCurrentPage(pageNumber);
+  };
+
+  /*const handlePageClick = (data) => {
+    //setCurrentPage(data.selected)
+    setHoveredImage(null)
+    const newOffset = (data.selected * PAGE_SIZE) % 7000
+    setCurrentPage(newOffset)
+  }*/
 
   const showInscribed = () => {}
 
@@ -240,22 +248,17 @@ const Inscribe = () => {
                   )
                 })}
               </div>
-              <div className="">
-                <ReactPaginate
-                  pageCount={Math.ceil(7000 / PAGE_SIZE)}
-                  pageRangeDisplayed={5}
-                  marginPagesDisplayed={3}
-                  onPageChange={handlePageClick}
-                  containerClassName="pagination"
-                  pageClassName="page-item"
-                  pageLinkClassName="page-link"
-                  previousClassName="page-item"
-                  previousLinkClassName="page-link"
-                  nextClassName="page-item"
-                  nextLinkClassName="page-link"
-                  breakClassName="page-item"
-                  breakLinkClassName="page-link"
-                  activeClassName="active"
+              <div className="mt-4">
+                <Pagination
+                  prevPageText="Prev"
+                  nextPageText="Next"
+                  firstPageText="First"
+                  lastPageText="End"
+                  activePage={currentPage}
+                  itemsCountPerPage={PAGE_SIZE}
+                  totalItemsCount={Math.ceil(7000 / PAGE_SIZE)}
+                  pageRangeDisplayed={3}
+                  onChange={handlePageClick}
                 />
               </div>
             </>
