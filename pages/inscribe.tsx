@@ -7,7 +7,8 @@ import { saveAs } from "file-saver";
 import Link from "next/link";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import Pagination from "../components/Pagination";
+// import ReactPaginate from "react-paginate";
+import Pagination from "react-js-pagination";
 
 const override: CSSProperties = {
   display: "block",
@@ -26,16 +27,17 @@ const customStyles = {
   },
 }
 
+const PAGE_SIZE = 20;
+
 const Inscribe = () => {
-  const [, /* ordHash */ setOrdHash] = useState<any[]>([]);
-  const [ipfsHash, setIpfsHash] = useState<any[]>([]);
-  const [images, setImages] = useState<any[]>([]);
-  const [filteredImages, setFilteredImages] = useState<any[]>([]);
+  const [ordHash, setOrdHash] = useState<any[]>([]);
+  const [ipfsHashes, setIpfsHashes] = useState<{ [key: string]: string }>({});
+  const [images, setImages] = useState<string[]>([]);
+  const [filteredImages, setFilteredImages] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [hoveredImage, setHoveredImage] = useState(null);
+  const [hoveredImage, setHoveredImage] = useState<number | null>(null);
   // Pagination
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [imgPerPag] = useState<number>(18);
 
   const B = [
     "7fa435c44774ca1daa3bcfa6e23e896f",
@@ -62,7 +64,7 @@ const Inscribe = () => {
         const inscriptions = feed.rss.channel.item;
         const itemIds = inscriptions.map((item) => {
           const preview = item.guid;
-          return `https://ordapi.xyz/preview${preview.replace(
+          return `https://ordapi.xyz/content${preview.replace(
             "/inscription",
             ""
           )}`;
@@ -92,10 +94,13 @@ const Inscribe = () => {
       try {
         setLoading(true);
 
+        const startIndex = currentPage * PAGE_SIZE;
+        const endIndex = startIndex + PAGE_SIZE;
+
         const imagesIds = [];
-        for (let i = 0; i < 50; i++) {
+        for (let i = startIndex; i < endIndex; i++) {
           imagesIds.push(
-            `https://ipfs.io/ipfs/QmeF1xZ7x2EDn4duY7zAdrn7aY6vdwZB9bErxjkfPTaB4Q/${i}.png`
+            `https://bafybeifrjlra6j65ehypogugqcdtfwa2axunyatcdxj6emomfrsjw3brdu.ipfs.nftstorage.link/${i}.png`
           );
         }
 
@@ -111,31 +116,43 @@ const Inscribe = () => {
           })
         );
 
-        setIpfsHash(hashes)
-        //console.table(hashes)
-
-        setLoading(false)
+        const hashesObject = hashes.reduce((acc, hash, index) => {
+          acc[imagesIds[index]] = hash;
+          return acc;
+        }, {});
+        setIpfsHashes(hashesObject);
+        setLoading(false);
       } catch (error) {
         console.log(error);
       }
     };
 
+
     getIpfsHash();
-  }, []);
+  }, [currentPage]);
 
   useEffect(() => {
-    const imagesToShow = images.filter((image, index) => {
-      const hash = ipfsHash[index];
+    const imagesToShow = images.filter((image) => {
+      const hash = ipfsHashes[image];
       return B.includes(hash);
     });
     setFilteredImages(imagesToShow);
-  }, [ipfsHash, images]);
+  }, [ipfsHashes, images]);
+
+  /* useEffect(() => {
+    console.table(JSON.stringify(ipfsHashes))
+    console.table(ordHash)
+  }, [ipfsHashes, ordHash]) */
 
   // Get current Page
-  const lastPage = currentPage * imgPerPag;
-  const firstPage = lastPage - imgPerPag;
-  const currentImgs = images.slice(firstPage, lastPage);
-  // console.log(lastPage, firstPage, currentPage)
+  /* const lastPage = currentPage * imgPerPag
+  const firstPage = lastPage - imgPerPag
+  const currentImgs = images.slice(firstPage, lastPage) */
+
+  const handlePageClick = (pageNumber) => {
+    setHoveredImage(null);
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <>
@@ -163,8 +180,8 @@ const Inscribe = () => {
                 volutpat vulputate.
               </p>
               <div className="grid grid-cols-2 gap-2 md:gap-5 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 xl:gap-7 justify-center items-center">
-                {currentImgs.map((image, index) => {
-                  const hash = ipfsHash[index];
+                {images.map((image, index) => {
+                  const hash = ipfsHashes[image];
                   const isHovered = hoveredImage === index;
                   return (
                     <div
@@ -212,12 +229,18 @@ const Inscribe = () => {
                   );
                 })}
               </div>
-              <div className="">
+              <div className="mt-4">
                 <Pagination
-                  items={images.length}
-                  pageSize={imgPerPag}
-                  currentPage={currentPage}
-                  onPageChange={(page: number) => setCurrentPage(page)}
+                  prevPageText="Prev"
+                  nextPageText="Next"
+                  firstPageText="First"
+                  lastPageText="End"
+                  activePage={currentPage}
+                  itemsCountPerPage={PAGE_SIZE}
+                  totalItemsCount={Math.ceil(7000 / PAGE_SIZE)}
+                  pageRangeDisplayed={3}
+                  onChange={handlePageClick}
+
                 />
               </div>
             </>
