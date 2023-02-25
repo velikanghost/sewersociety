@@ -1,14 +1,13 @@
-import axios from "axios";
-import Image from "next/image";
-import React, { CSSProperties, useEffect, useState } from "react";
-import crypto from "crypto";
-import HashLoader from "react-spinners/HashLoader";
-import { saveAs } from "file-saver";
-import Link from "next/link";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-// import ReactPaginate from "react-paginate";
-import Pagination from "react-js-pagination";
+import axios from "axios"
+import Image from "next/image"
+import React, { CSSProperties, useEffect, useState } from "react"
+import crypto from "crypto"
+import HashLoader from "react-spinners/HashLoader"
+import { saveAs } from "file-saver"
+import Link from "next/link"
+import Footer from "../components/Footer"
+import Header from "../components/Header"
+import Pagination from "react-js-pagination"
 
 const override: CSSProperties = {
   display: "block",
@@ -16,12 +15,10 @@ const override: CSSProperties = {
   borderColor: "red",
 }
 
-
-const PAGE_SIZE = 20;
+const PAGE_SIZE = 20
 
 const Inscribe = () => {
-
-  const [ordHash, setOrdHash] = useState<any[]>([])
+  const [, /* ordHash */ setOrdHash] = useState<any[]>([])
   const [ipfsHashes, setIpfsHashes] = useState<{ [key: string]: string }>({})
   const [images, setImages] = useState<string[]>([])
   const [filteredImages, setFilteredImages] = useState<string[]>([])
@@ -29,7 +26,7 @@ const Inscribe = () => {
   const [loading, setLoading] = useState<boolean>(false)
   const [hoveredImage, setHoveredImage] = useState<number | null>(null)
   // Pagination
-  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [currentPage, setCurrentPage] = useState<number>(1)
 
   const B = [
     "7fa435c44774ca1daa3bcfa6e23e896f",
@@ -85,7 +82,7 @@ const Inscribe = () => {
     const getIpfsHashes = async () => {
       try {
         setLoading(true)
-        const startIndex = currentPage * PAGE_SIZE
+        const startIndex = (currentPage - 1) * PAGE_SIZE
         const endIndex = startIndex + PAGE_SIZE
 
         const imagesIds = []
@@ -117,45 +114,33 @@ const Inscribe = () => {
         console.log(error)
       }
     }
-    
+
     getIpfsHashes()
   }, [currentPage])
 
   useEffect(() => {
     const imagesToShow = images.filter((image) => {
       const hash = ipfsHashes[image]
-      return !ordHash.includes(hash)
+      return !B.includes(hash)
     })
     const imagesToOmit = images.filter((image) => {
       const hash = ipfsHashes[image]
-      return ordHash.includes(hash)
+      return B.includes(hash)
     })
     setFilteredImages(imagesToShow)
     setInscribedImages(imagesToOmit)
   }, [ipfsHashes, images])
 
-  useEffect(() => {
-    //console.table(JSON.stringify(ipfsHashes))
-    //console.table(!filteredImages)
+  /* useEffect(() => {
+    console.log(JSON.stringify(ipfsHashes))
+    console.table(!filteredImages)
     console.table(ordHash)
-  }, [ipfsHashes, ordHash])
-
-  // Get current Page
-  /* const lastPage = currentPage * imgPerPag
-  const firstPage = lastPage - imgPerPag
-  const currentImgs = images.slice(firstPage, lastPage) */
+  }, [ipfsHashes, ordHash]) */
 
   const handlePageClick = (pageNumber) => {
-    setHoveredImage(null);
-    setCurrentPage(pageNumber);
-  };
-
-  /*const handlePageClick = (data) => {
-    //setCurrentPage(data.selected)
     setHoveredImage(null)
-    const newOffset = (data.selected * PAGE_SIZE) % 7000
-    setCurrentPage(newOffset)
-  }*/
+    setCurrentPage(pageNumber)
+  }
 
   const showInscribed = () => {}
 
