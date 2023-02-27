@@ -3,8 +3,8 @@ import React from "react"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import Hero from "../components/Hero"
-import MintSteps from "../components/MintSteps"
-import Link from "next/link"
+/* import MintSteps from "../components/MintSteps"
+import Link from "next/link" */
 
 export default function Home() {
   return (
@@ -18,12 +18,12 @@ export default function Home() {
       <main>
         <Header />
         <Hero />
-        <MintSteps />
-        <div className="flex justify-center items-center sm:mr-0 mr-2 font-bold font-intro uppercase pt-9 pb-12 text-primary">
+        {/* <MintSteps /> */}
+        {/* <div className="flex justify-center items-center sm:mr-0 mr-2 font-bold font-intro uppercase pt-9 pb-12 text-primary">
           <Link href="/inscribe" className="hover:no-underline">
             CLICK HERE TO INSCRIBE
           </Link>
-        </div>
+        </div> */}
         <Footer />
       </main>
     </>

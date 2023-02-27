@@ -13,12 +13,14 @@ const Header = () => {
           </Link>
         </div>
         <ul className="flex justify-center items-center sm:gap-[1.5rem] gap-[10px] text-[28px] text-[#333] cursor-pointer">
-          <Link scroll className="brand-link" href="#how-to-mint">
+          {/* Commented out because we're still in development */}
+
+          {/* <Link scroll className="brand-link" href="#how-to-mint">
             how to mint
-          </Link>
-          <Link scroll className="brand-link" href="/inscribe">
+          </Link> */}
+          {/* <Link scroll className="brand-link" href="/inscribe">
             INSCRIBE
-          </Link>
+          </Link> */}
         </ul>
       </div>
     </nav>
