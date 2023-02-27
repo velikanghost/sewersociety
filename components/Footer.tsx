@@ -6,8 +6,8 @@ import footerLogo from "../public/img/sewer-footer.png"
 
 const Footer = () => {
   return (
-    <footer className="bg-[#474744] px-6 text-center text-white">
-      <div className="container mx-auto h-[160px] xl:h-[200px] md:h-[180px] flex justify-between items-center">
+    <footer className="w-full bg-[#474744] text-center text-white">
+      <div className="container mx-auto px-4 md:px-6 h-[160px] xl:h-[200px] md:h-[180px] flex justify-between items-center">
         <div className="footer-logo">
           <Image
             className="xl:w-52"
